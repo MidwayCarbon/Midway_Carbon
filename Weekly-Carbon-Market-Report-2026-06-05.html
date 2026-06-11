@@ -682,6 +682,18 @@ code {
 
     .data-table tbody tr:nth-child(even) { background-color: var(--color-neutral-50); }
     .data-table tbody tr:last-child td { border-bottom: none; }
+    /* ── RANGE VISUAL ── */
+    .rv-cell { padding: 10px 16px; text-align: left; vertical-align: middle; }
+    .rv-wrap { display: flex; align-items: center; gap: 6px; }
+    .rv-endpoint { font-size: 10px; color: var(--color-fg-tertiary); white-space: nowrap; font-weight: 500; min-width: 38px; font-family: 'Instrument Sans', sans-serif; }
+    .rv-endpoint.rv-left { text-align: right; }
+    .rv-endpoint.rv-right { text-align: left; }
+    .rv-track { position: relative; flex: 1; height: 8px; background: var(--color-neutral-100); border-radius: 4px; overflow: hidden; min-width: 70px; }
+    .data-table tbody tr:nth-child(even) .rv-track { background: #ffffff; }
+    .rv-bar { position: absolute; top: 0; height: 100%; background: var(--color-brand-primary); border-radius: 3px; min-width: 4px; }
+    .rv-bar-annual { position: absolute; top: 0; height: 100%; background: var(--color-neutral-300); border-radius: 3px; min-width: 2px; }
+    .rv-week-lbl { text-align: center; font-size: 10px; color: var(--color-brand-primary); font-weight: 600; margin-top: 3px; }
+
 
     .positive { color: var(--color-success); font-weight: 600; }
     .negative { color: var(--color-error); font-weight: 600; }
@@ -929,13 +941,13 @@ code {
   <div class="metrics-grid">
     <div class="metric-card">
       <div class="metric-label">Generic ACCU (Friday)</div>
-      <div class="metric-value">A$37.60</div>
+      <div class="metric-value">$37.60</div>
       <div class="metric-sub">Opened and closed flat</div>
     </div>
     <div class="metric-card">
       <div class="metric-label">Env. Plantings (Friday)</div>
-      <div class="metric-value">A$51.00</div>
-      <div class="metric-sub">Repriced from A$61.00 Monday</div>
+      <div class="metric-value">$51.00</div>
+      <div class="metric-sub">Repriced from $61.00 Monday</div>
     </div>
     <div class="metric-card">
       <div class="metric-label">Weekly Trade Volume</div>
@@ -951,7 +963,7 @@ code {
 
   <!-- Market Overview -->
   <div class="overview-block">
-    <p>The ACCU market was broadly steady over the week, with RepuTex assessed Generic ACCUs opening and closing at A$37.60. Safeguard-linked pricing softened slightly, with SMCs easing from A$37.80 to A$37.65, while Plantation Forestry ACCUs held their premium to generic units.</p>
+    <p>The ACCU market was broadly steady over the week, with RepuTex assessed Generic ACCUs opening and closing at $37.60. Safeguard-linked pricing softened slightly, with SMCs easing from $37.80 to $37.65, while Plantation Forestry ACCUs held their premium to generic units.</p>
     <p>The main method development was DCCEEW's update on the Integrated Farm and Land Management method. ERAC consultation closed on 9 March 2026, with 64 submissions received, and the department is continuing design work on discounts, baselines, measurement and method complexity.</p>
   </div>
 
@@ -963,7 +975,7 @@ code {
     </div>
     <div class="takeaway-card condition">
       <strong>Market Condition</strong>
-      <p>Generic ACCUs remain tightly rangebound at A$37.60. Premium land-based methods retain clear spreads. Environmental Plantings repricing should be treated cautiously.</p>
+      <p>Generic ACCUs remain tightly rangebound at $37.60. Premium land-based methods retain clear spreads. Environmental Plantings repricing should be treated cautiously.</p>
     </div>
   </div>
 
@@ -1026,37 +1038,37 @@ code {
       <circle cx="207" cy="248" r="7" fill="#4a90e2"></circle>
       <text x="207" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">Generic</text>
       <text x="207" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">ACCUs</text>
-      <text x="207" y="320" text-anchor="middle" font-size="11" fill="#78716b">A$37.60</text>
+      <text x="207" y="320" text-anchor="middle" font-size="11" fill="#78716b">$37.60</text>
 
       <!-- HIR ACCUs $37.50 → y=249  color #6ba3e8 -->
       <circle cx="334" cy="249" r="7" fill="#6ba3e8"></circle>
       <text x="334" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">HIR</text>
       <text x="334" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">ACCUs</text>
-      <text x="334" y="320" text-anchor="middle" font-size="11" fill="#78716b">A$37.50</text>
+      <text x="334" y="320" text-anchor="middle" font-size="11" fill="#78716b">$37.50</text>
 
       <!-- SMCs $37.65 → y=247  color #f4d03f -->
       <circle cx="461" cy="247" r="7" fill="#f4d03f"></circle>
       <text x="461" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">SMCs</text>
       <text x="461" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917"></text>
-      <text x="461" y="320" text-anchor="middle" font-size="11" fill="#78716b">A$37.65</text>
+      <text x="461" y="320" text-anchor="middle" font-size="11" fill="#78716b">$37.65</text>
 
       <!-- Plantation Forestry $39.30 → y=233  color #145c3c -->
       <circle cx="588" cy="233" r="7" fill="#145c3c"></circle>
       <text x="588" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">Plantation</text>
       <text x="588" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">Forestry</text>
-      <text x="588" y="320" text-anchor="middle" font-size="11" fill="#78716b">A$39.30</text>
+      <text x="588" y="320" text-anchor="middle" font-size="11" fill="#78716b">$39.30</text>
 
       <!-- SFM + ICB $47.90 → y=159  color #d73136 -->
       <circle cx="715" cy="159" r="7" fill="#d73136"></circle>
       <text x="715" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">SFM</text>
       <text x="715" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">+ ICB</text>
-      <text x="715" y="320" text-anchor="middle" font-size="11" fill="#78716b">A$47.90</text>
+      <text x="715" y="320" text-anchor="middle" font-size="11" fill="#78716b">$47.90</text>
 
       <!-- Environmental Plantings $51.00 → y=133  color #2da86d -->
       <circle cx="842" cy="133" r="7" fill="#2da86d"></circle>
       <text x="842" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">Env.</text>
       <text x="842" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1917">Plantings</text>
-      <text x="842" y="320" text-anchor="middle" font-size="11" fill="#78716b">A$51.00</text>
+      <text x="842" y="320" text-anchor="middle" font-size="11" fill="#78716b">$51.00</text>
 
     </svg>
   </div>
@@ -1066,7 +1078,7 @@ code {
     <thead>
       <tr>
         <th>Segment</th>
-        <th>Weekly Range</th>
+        <th style="text-align:center;min-width:240px;">Price Range <span style="color:var(--color-brand-primary);">weekly</span>/<span style="color:var(--color-fg-tertiary);">12 month</span></th>
         <th>Monday</th>
         <th>Friday</th>
         <th>Move</th>
@@ -1076,50 +1088,92 @@ code {
     <tbody>
       <tr>
         <td>Generic ACCUs</td>
-        <td>A$37.55–A$37.60</td>
-        <td>A$37.60</td>
-        <td>A$37.60</td>
-        <td class="neutral">A$0.00</td>
+        <td class="rv-cell">
+          <div class="rv-wrap">
+            <span class="rv-endpoint rv-left">$37.00</span>
+            <div class="rv-track"><div class="rv-bar-annual" style="left:0%;width:100%;"></div><div class="rv-bar" style="left:36.7%;width:3.3%;"></div></div>
+            <span class="rv-endpoint rv-right">$38.50</span>
+          </div>
+          <div class="rv-week-lbl">$37.55–$37.60</div>
+        </td>
+        <td>$37.60</td>
+        <td>$37.60</td>
+        <td class="neutral">$0.00</td>
         <td>Stable; held in a tight range</td>
       </tr>
       <tr>
         <td>HIR ACCUs</td>
-        <td>A$37.50–A$37.65</td>
-        <td>A$37.55</td>
-        <td>A$37.50</td>
-        <td class="negative">–A$0.05</td>
+        <td class="rv-cell">
+          <div class="rv-wrap">
+            <span class="rv-endpoint rv-left">$36.90</span>
+            <div class="rv-track"><div class="rv-bar-annual" style="left:0%;width:100%;"></div><div class="rv-bar" style="left:34.3%;width:8.6%;"></div></div>
+            <span class="rv-endpoint rv-right">$38.65</span>
+          </div>
+          <div class="rv-week-lbl">$37.50–$37.65</div>
+        </td>
+        <td>$37.55</td>
+        <td>$37.50</td>
+        <td class="negative">–$0.05</td>
         <td>Mixed; closed slightly lower</td>
       </tr>
       <tr>
         <td>SMCs</td>
-        <td>A$37.50–A$37.80</td>
-        <td>A$37.80</td>
-        <td>A$37.65</td>
-        <td class="negative">–A$0.15</td>
+        <td class="rv-cell">
+          <div class="rv-wrap">
+            <span class="rv-endpoint rv-left">$37.00</span>
+            <div class="rv-track"><div class="rv-bar-annual" style="left:0%;width:100%;"></div><div class="rv-bar" style="left:5.6%;width:3.3%;"></div></div>
+            <span class="rv-endpoint rv-right">$46.00</span>
+          </div>
+          <div class="rv-week-lbl">$37.50–$37.80</div>
+        </td>
+        <td>$37.80</td>
+        <td>$37.65</td>
+        <td class="negative">–$0.15</td>
         <td>Softer; compliance-linked pricing eased</td>
       </tr>
       <tr>
         <td>Plantation Forestry</td>
-        <td>A$39.25–A$39.30</td>
-        <td>A$39.30</td>
-        <td>A$39.30</td>
-        <td class="neutral">A$0.00</td>
+        <td class="rv-cell">
+          <div class="rv-wrap">
+            <span class="rv-endpoint rv-left">$38.70</span>
+            <div class="rv-track"><div class="rv-bar-annual" style="left:0%;width:100%;"></div><div class="rv-bar" style="left:36.7%;width:3.3%;"></div></div>
+            <span class="rv-endpoint rv-right">$40.20</span>
+          </div>
+          <div class="rv-week-lbl">$39.25–$39.30</div>
+        </td>
+        <td>$39.30</td>
+        <td>$39.30</td>
+        <td class="neutral">$0.00</td>
         <td>Stable premium to generic maintained</td>
       </tr>
       <tr>
         <td>Environmental Plantings</td>
-        <td>A$50.95–A$61.00</td>
-        <td>A$61.00</td>
-        <td>A$51.00</td>
-        <td class="negative">–A$10.00</td>
+        <td class="rv-cell">
+          <div class="rv-wrap">
+            <span class="rv-endpoint rv-left">$50.40</span>
+            <div class="rv-track"><div class="rv-bar-annual" style="left:0%;width:100%;"></div><div class="rv-bar" style="left:4.8%;width:87.4%;"></div></div>
+            <span class="rv-endpoint rv-right">$61.90</span>
+          </div>
+          <div class="rv-week-lbl">$50.95–$61.00</div>
+        </td>
+        <td>$61.00</td>
+        <td>$51.00</td>
+        <td class="negative">–$10.00</td>
         <td>Repriced lower after Monday</td>
       </tr>
       <tr>
         <td>SFM + ICB</td>
-        <td>A$47.85–A$47.90</td>
-        <td>A$47.90</td>
-        <td>A$47.90</td>
-        <td class="neutral">A$0.00</td>
+        <td class="rv-cell">
+          <div class="rv-wrap">
+            <span class="rv-endpoint rv-left">$47.30</span>
+            <div class="rv-track"><div class="rv-bar-annual" style="left:0%;width:100%;"></div><div class="rv-bar" style="left:36.7%;width:3.3%;"></div></div>
+            <span class="rv-endpoint rv-right">$48.80</span>
+          </div>
+          <div class="rv-week-lbl">$47.85–$47.90</div>
+        </td>
+        <td>$47.90</td>
+        <td>$47.90</td>
+        <td class="neutral">$0.00</td>
         <td>Stable co-benefit premium</td>
       </tr>
     </tbody>
@@ -1142,8 +1196,8 @@ code {
         <div class="method-name">Plantation Forestry</div>
         <span class="method-status status-stable">Stable</span>
       </div>
-      <div class="method-price">A$39.30</div>
-      <div class="method-premium">+4.5% premium &nbsp;|&nbsp; +A$1.70 to generic</div>
+      <div class="method-price">$39.30</div>
+      <div class="method-premium">+4.5% premium &nbsp;|&nbsp; +$1.70 to generic</div>
       <div class="method-commentary">Maintained steady pricing throughout the week. Plantation ACCUs continue to command a stable co-benefit premium to generic units with no observed volatility.</div>
     </div>
 
@@ -1152,8 +1206,8 @@ code {
         <div class="method-name">SFM + ICB</div>
         <span class="method-status status-stable">Stable</span>
       </div>
-      <div class="method-price">A$47.90</div>
-      <div class="method-premium">+27.4% premium &nbsp;|&nbsp; +A$10.30 to generic</div>
+      <div class="method-price">$47.90</div>
+      <div class="method-premium">+27.4% premium &nbsp;|&nbsp; +$10.30 to generic</div>
       <div class="method-commentary">Stable and sustained co-benefit premium across the week. SFM + ICB continues to price materially above generic units, reflecting strong biodiversity and native vegetation credentials.</div>
     </div>
 
@@ -1162,36 +1216,36 @@ code {
         <div class="method-name">Environmental Plantings</div>
         <span class="method-status status-softer">Softer</span>
       </div>
-      <div class="method-price">A$51.00</div>
-      <div class="method-premium">+35.6% premium &nbsp;|&nbsp; +A$13.40 to generic</div>
-      <div class="method-commentary">Sharp repricing lower on Monday from A$61.00 to A$51.00. The repricing should be treated cautiously without accompanying trade-log confirmation of comparable transactions at the new level.</div>
+      <div class="method-price">$51.00</div>
+      <div class="method-premium">+35.6% premium &nbsp;|&nbsp; +$13.40 to generic</div>
+      <div class="method-commentary">Sharp repricing lower on Monday from $61.00 to $51.00. The repricing should be treated cautiously without accompanying trade-log confirmation of comparable transactions at the new level.</div>
     </div>
   </div>
 
   <!-- Premium Bar Chart -->
   <div class="chart-wrap">
-    <div class="chart-wrap-title">Premium to Generic ACCU — Friday Close (Generic baseline A$37.60)</div>
+    <div class="chart-wrap-title">Premium to Generic ACCU — Friday Close (Generic baseline $37.60)</div>
     <div class="premium-bars">
       <div class="pbar-row">
         <div class="pbar-label">Plantation Forestry</div>
         <div class="pbar-track">
           <div class="pbar-fill plantation" style="width:12.6%;">4.5%</div>
         </div>
-        <div class="pbar-values">A$39.30 &nbsp;+A$1.70</div>
+        <div class="pbar-values">$39.30 &nbsp;+$1.70</div>
       </div>
       <div class="pbar-row">
         <div class="pbar-label">SFM + ICB</div>
         <div class="pbar-track">
           <div class="pbar-fill sfm" style="width:77%;">27.4%</div>
         </div>
-        <div class="pbar-values">A$47.90 &nbsp;+A$10.30</div>
+        <div class="pbar-values">$47.90 &nbsp;+$10.30</div>
       </div>
       <div class="pbar-row">
         <div class="pbar-label">Environmental Plantings</div>
         <div class="pbar-track">
           <div class="pbar-fill ep" style="width:100%;">35.6%</div>
         </div>
-        <div class="pbar-values">A$51.00 &nbsp;+A$13.40</div>
+        <div class="pbar-values">$51.00 &nbsp;+$13.40</div>
       </div>
     </div>
   </div>
@@ -1208,7 +1262,7 @@ code {
 
   <div class="text-block">
     <p>Weekly trade activity totalled 242,300 tCO&#8322;e across four method types. Generic ACCUs dominated at 130,000 tCO&#8322;e (53.7% of volume), followed by Human Induced Regeneration at 75,000 tCO&#8322;e (31.0%). Generic (No AD) contributed 32,300 tCO&#8322;e (13.3%) and Environmental Plantings 5,000 tCO&#8322;e (2.1%).</p>
-    <p>The largest individual trade was a 100,000 tCO&#8322;e Generic put option (Sep-26 delivery, A$35.00) transacted on 5 June. Spot market activity was broadly distributed through the week, with HIR spot trades and Generic (No AD) lots ranging from 10,000 to 40,000 tCO&#8322;e.</p>
+    <p>The largest individual trade was a 100,000 tCO&#8322;e Generic put option (Sep-26 delivery, $35.00) transacted on 5 June. Spot market activity was broadly distributed through the week, with HIR spot trades and Generic (No AD) lots ranging from 10,000 to 40,000 tCO&#8322;e.</p>
     <div class="source-line">Source: Jarden trade log, 1–5 June 2026</div>
   </div>
 
@@ -1287,7 +1341,7 @@ code {
 
   <div class="text-block">
     <h4>Market Consolidation — May Context</h4>
-    <p>CORE Markets' May ACCU update noted that the market consolidated after April's rally, with spot ACCUs briefly testing A$38 before closing May at A$37.55. The report also noted ongoing discussion around Safeguard-held inventory and near-term market balance as key watchpoints for price direction.</p>
+    <p>CORE Markets' May ACCU update noted that the market consolidated after April's rally, with spot ACCUs briefly testing $38 before closing May at $37.55. The report also noted ongoing discussion around Safeguard-held inventory and near-term market balance as key watchpoints for price direction.</p>
     <div class="source-line">Source: CORE Markets ACCU Market Monthly Update — May 2026</div>
   </div>
 
@@ -1302,7 +1356,7 @@ code {
     <div class="outlook-card">
       <div class="outlook-horizon">Short Term</div>
       <div class="outlook-view">Firm, rangebound</div>
-      <div class="outlook-rationale">Generic ACCUs held around A$37.60 and remain below the A$38 level briefly tested in May.</div>
+      <div class="outlook-rationale">Generic ACCUs held around $37.60 and remain below the $38 level briefly tested in May.</div>
     </div>
     <div class="outlook-card">
       <div class="outlook-horizon">Medium Term</div>
