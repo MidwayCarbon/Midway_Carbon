@@ -4,7 +4,376 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weekly Carbon Market Report - 15-19 June 2026</title>
-  <link rel="stylesheet" href="Design System/colors_and_type.css">
+  <style>@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/InstrumentSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Instrument Sans Condensed';
+  src: url('fonts/InstrumentSans_Condensed-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans Condensed';
+  src: url('fonts/InstrumentSans_Condensed-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans Condensed';
+  src: url('fonts/InstrumentSans_Condensed-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Sans Condensed';
+  src: url('fonts/InstrumentSans_Condensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ============================================================
+   COLOR SYSTEM
+   ============================================================ */
+
+:root {
+  /* Primary Brand Colors */
+  --color-brand-primary: #1f8a5b;        /* Rich forest green - sustainability */
+  --color-brand-primary-light: #2da86d;  /* Lighter green for secondary use */
+  --color-brand-primary-dark: #166644;   /* Darker green for emphasis */
+
+  /* Accent Colors - Environmental Context */
+  --color-accent-earth: #8b6f47;         /* Earth brown */
+  --color-accent-sky: #4a90e2;           /* Sky blue - data/charts */
+  --color-accent-warning: #e8a206;       /* Amber - caution/alert */
+  --color-accent-negative: #d73136;      /* Red - negative impact */
+
+  /* Semantic Colors */
+  --color-success: #2da86d;              /* Green - positive impact */
+  --color-warning: #e8a206;              /* Amber - needs attention */
+  --color-error: #d73136;                /* Red - critical */
+  --color-info: #4a90e2;                 /* Blue - informational */
+
+  /* Neutral Scale */
+  --color-neutral-50: #fafaf9;           /* Almost white */
+  --color-neutral-100: #f5f5f4;          /* Very light gray */
+  --color-neutral-200: #e7e5e4;          /* Light gray */
+  --color-neutral-300: #d6d3d1;          /* Light-mid gray */
+  --color-neutral-400: #a8a29e;          /* Mid gray */
+  --color-neutral-500: #78716b;          /* Medium gray */
+  --color-neutral-600: #57534e;          /* Dark gray */
+  --color-neutral-700: #44403c;          /* Darker gray */
+  --color-neutral-800: #292520;          /* Very dark gray */
+  --color-neutral-900: #1c1917;          /* Near black */
+
+  /* Foreground / Background */
+  --color-fg-primary: #1c1917;           /* Text on light backgrounds */
+  --color-fg-secondary: #57534e;         /* Secondary text */
+  --color-fg-tertiary: #a8a29e;          /* Tertiary/muted text */
+  --color-fg-inverse: #fafaf9;           /* Text on dark backgrounds */
+
+  --color-bg-primary: #fafaf9;           /* Primary background */
+  --color-bg-secondary: #f5f5f4;         /* Secondary/elevated background */
+  --color-bg-tertiary: #e7e5e4;          /* Tertiary background */
+  --color-bg-overlay: rgba(28, 25, 23, 0.8); /* Semi-transparent overlay */
+
+  /* Border Colors */
+  --color-border-light: #e7e5e4;
+  --color-border-default: #d6d3d1;
+  --color-border-strong: #a8a29e;
+
+  /* Chart / Data Visualization Colors */
+  --color-chart-1: #1f8a5b;              /* Green - primary */
+  --color-chart-2: #4a90e2;              /* Blue */
+  --color-chart-3: #e8a206;              /* Amber */
+  --color-chart-4: #8b6f47;              /* Earth */
+  --color-chart-5: #d73136;              /* Red */
+
+  /* ============================================================
+     TYPOGRAPHY SCALE
+     ============================================================ */
+
+  /* Display / Hero */
+  --type-display-lg: 56px;
+  --type-display-md: 48px;
+  --type-display-sm: 40px;
+
+  /* Heading */
+  --type-heading-xl: 36px;
+  --type-heading-lg: 32px;
+  --type-heading-md: 28px;
+  --type-heading-sm: 24px;
+  --type-heading-xs: 20px;
+
+  /* Body / Paragraph */
+  --type-body-lg: 18px;
+  --type-body-md: 16px;
+  --type-body-sm: 14px;
+  --type-body-xs: 12px;
+
+  /* Label / UI */
+  --type-label-lg: 16px;
+  --type-label-md: 14px;
+  --type-label-sm: 12px;
+  --type-label-xs: 11px;
+
+  /* Mono / Code */
+  --type-mono-lg: 16px;
+  --type-mono-md: 14px;
+  --type-mono-sm: 12px;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-relaxed: 0.01em;
+  --letter-spacing-loose: 0.05em;
+
+  /* ============================================================
+     SPACING SCALE
+     ============================================================ */
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+
+  /* ============================================================
+     LAYOUT & COMPONENT TOKENS
+     ============================================================ */
+
+  /* Border Radius */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+  /* Elevation / Z-index */
+  --z-base: 0;
+  --z-elevated: 10;
+  --z-dropdown: 100;
+  --z-sticky: 50;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-tooltip: 400;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 200ms ease-out;
+  --transition-slow: 300ms ease-out;
+
+  /* Content Max-Width */
+  --content-max-width: 1200px;
+}
+
+/* ============================================================
+   SEMANTIC TYPOGRAPHY STYLES
+   ============================================================ */
+
+html {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 16px;
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-primary);
+}
+
+h1 {
+  font-size: var(--type-heading-xl);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+h2 {
+  font-size: var(--type-heading-lg);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+h3 {
+  font-size: var(--type-heading-md);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+h4 {
+  font-size: var(--type-heading-sm);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+h5 {
+  font-size: var(--type-heading-xs);
+  font-weight: 600;
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+h6 {
+  font-size: var(--type-label-lg);
+  font-weight: 600;
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-relaxed);
+  margin: 0 0 var(--spacing-sm) 0;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: var(--type-body-md);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+small {
+  font-size: var(--type-body-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-fg-secondary);
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  font-size: var(--type-mono-sm);
+  background-color: var(--color-neutral-200);
+  color: var(--color-fg-primary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+.text-primary {
+  color: var(--color-fg-primary);
+}
+
+.text-secondary {
+  color: var(--color-fg-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-fg-tertiary);
+}
+
+.text-inverse {
+  color: var(--color-fg-inverse);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--color-bg-tertiary);
+}
+
+.bg-brand {
+  background-color: var(--color-brand-primary);
+  color: var(--color-fg-inverse);
+}
+</style>
   
   <style>
     *, *::before, *::after { box-sizing: border-box; }
