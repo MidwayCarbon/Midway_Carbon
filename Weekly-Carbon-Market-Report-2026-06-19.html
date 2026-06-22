@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Carbon Market Report - 15-19 June 2026</title>
+  <link rel="stylesheet" href="Design System/colors_and_type.css">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin:0; font-family:'Instrument Sans', sans-serif; background:var(--color-bg-primary); color:var(--color-fg-primary); }
+    .report-container { max-width:var(--content-max-width); margin:0 auto; padding:48px 32px 64px; }
+    .report-header { display:flex; justify-content:space-between; gap:24px; padding-bottom:24px; border-bottom:2px solid var(--color-border-default); margin-bottom:32px; }
+    .header-title { font-size:var(--type-heading-xl); font-weight:700; line-height:var(--line-height-tight); margin-bottom:8px; }
+    .header-meta { display:flex; gap:16px; color:var(--color-fg-secondary); font-size:var(--type-body-sm); }
+    .header-badge { align-self:flex-start; padding:6px 14px; border-radius:var(--radius-full); background:var(--color-brand-primary); color:#fff; font-size:var(--type-label-sm); font-weight:700; text-transform:uppercase; letter-spacing:var(--letter-spacing-loose); }
+    .metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px; }
+    .metric-card, .overview-block, .takeaway-card, .chart-wrap, .method-card, .text-block, .outlook-card { background:var(--color-bg-secondary); border:1px solid var(--color-border-light); border-radius:var(--radius-md); box-shadow:var(--shadow-sm); }
+    .metric-card { padding:20px; }
+    .metric-label { font-size:var(--type-label-sm); font-weight:700; color:var(--color-fg-secondary); text-transform:uppercase; letter-spacing:var(--letter-spacing-loose); margin-bottom:8px; }
+    .metric-value { font-size:30px; font-weight:700; line-height:1; margin-bottom:6px; }
+    .metric-sub { font-size:var(--type-body-xs); color:var(--color-fg-tertiary); }
+    .overview-block { border-left:4px solid var(--color-brand-primary); padding:24px; margin-bottom:24px; }
+    .overview-block p { font-size:var(--type-body-md); line-height:var(--line-height-relaxed); margin:0 0 12px; }
+    .takeaway-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:48px; }
+    .takeaway-card { padding:24px; color:#fff; background:linear-gradient(135deg,var(--color-brand-primary),var(--color-brand-primary-dark)); }
+    .takeaway-card.condition { background:linear-gradient(135deg,var(--color-brand-primary-light),var(--color-brand-primary)); }
+    .takeaway-card strong { display:block; font-size:var(--type-label-md); text-transform:uppercase; letter-spacing:var(--letter-spacing-loose); margin-bottom:8px; opacity:.86; }
+    .takeaway-card p { margin:0; line-height:var(--line-height-relaxed); }
+    .section-divider { display:flex; align-items:center; gap:14px; margin:48px 0 16px; }
+    .section-num { width:32px; height:32px; border-radius:50%; background:var(--color-brand-primary); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; }
+    .section-line { flex:1; height:1px; background:var(--color-border-light); }
+    .section-heading { font-size:var(--type-heading-md); margin:0 0 24px; }
+    .chart-wrap { padding:24px; margin-bottom:24px; overflow-x:auto; }
+    .chart-wrap-title { font-size:var(--type-label-lg); font-weight:700; margin-bottom:20px; }
+    .data-table { width:100%; border-collapse:collapse; background:var(--color-bg-secondary); border-top:2px solid var(--color-border-default); border-bottom:2px solid var(--color-border-default); margin-bottom:24px; }
+    .data-table thead { background:var(--color-neutral-100); border-bottom:1px solid var(--color-border-default); }
+    .data-table th, .data-table td { padding:18px 16px; text-align:right; border-bottom:1px solid var(--color-border-light); font-size:var(--type-body-sm); vertical-align:middle; }
+    .data-table th { font-size:var(--type-label-sm); font-weight:700; color:var(--color-fg-secondary); text-transform:uppercase; letter-spacing:var(--letter-spacing-loose); }
+    .data-table th:first-child, .data-table td:first-child { text-align:left; }
+    .data-table tbody tr:nth-child(even) { background:var(--color-neutral-50); }
+    .data-table tbody tr:last-child td { border-bottom:none; }
+    .rv-cell { min-width:280px; }
+    .rv-wrap { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .rv-endpoint { min-width:54px; font-size:12px; color:var(--color-fg-tertiary); white-space:nowrap; }
+    .rv-left { text-align:right; }
+    .rv-right { text-align:left; }
+    .rv-track { position:relative; flex:1; height:14px; background:var(--color-neutral-300); border-radius:7px; overflow:hidden; }
+    .rv-bar { position:absolute; top:0; height:100%; background:var(--color-brand-primary); border-radius:7px; min-width:4px; }
+    .rv-week-lbl { text-align:center; font-size:12px; color:var(--color-brand-primary); font-weight:600; }
+    .positive { color:var(--color-success); font-weight:700; }
+    .negative { color:var(--color-error); font-weight:700; }
+    .neutral { color:var(--color-fg-secondary); font-weight:700; }
+    .method-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+    .method-card { padding:20px; }
+    .method-card-header { display:flex; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .method-name { font-size:var(--type-label-lg); font-weight:700; }
+    .method-status { padding:3px 10px; border-radius:var(--radius-sm); font-size:var(--type-label-xs); font-weight:700; text-transform:uppercase; }
+    .status-stable { background:rgba(45,168,109,.12); color:var(--color-success); }
+    .status-softer { background:rgba(232,162,6,.12); color:var(--color-warning); }
+    .method-price { font-size:26px; font-weight:700; margin-bottom:4px; }
+    .method-premium, .method-commentary { font-size:var(--type-body-sm); color:var(--color-fg-secondary); line-height:var(--line-height-relaxed); }
+    .pbar-row { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+    .pbar-label { width:160px; flex-shrink:0; text-align:right; font-size:var(--type-body-sm); font-weight:600; }
+    .pbar-track { flex:1; height:26px; background:var(--color-neutral-200); border-radius:var(--radius-sm); overflow:hidden; }
+    .pbar-fill { height:100%; color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; border-radius:var(--radius-sm); }
+    .pbar-fill.plantation { background:#145c3c; }
+    .pbar-fill.sfm { background:#d73136; }
+    .pbar-fill.ep { background:#2da86d; }
+    .pbar-values { width:88px; flex-shrink:0; font-size:var(--type-body-sm); font-weight:600; text-align:right; }
+    .text-block { border-left:4px solid var(--color-brand-primary); padding:24px; margin-bottom:24px; }
+    .text-block p { margin:0 0 10px; line-height:var(--line-height-relaxed); }
+    .source-line { font-size:var(--type-body-xs); color:var(--color-fg-tertiary); padding-top:12px; margin-top:12px; border-top:1px solid var(--color-border-light); }
+    .trade-grid { display:grid; grid-template-columns:1fr; gap:16px; align-items:start; }
+    .donut-panel { display:flex; gap:22px; align-items:center; }
+    .legend { display:flex; flex-direction:column; gap:10px; min-width:240px; }
+    .legend-row { display:flex; gap:8px; align-items:center; font-size:var(--type-body-sm); }
+    .legend-row strong { margin-left:auto; }
+    .legend-dot { width:12px; height:12px; border-radius:50%; }
+    .outlook-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .outlook-card { padding:20px; }
+    .outlook-horizon { font-size:var(--type-label-sm); font-weight:700; text-transform:uppercase; letter-spacing:var(--letter-spacing-loose); color:var(--color-fg-secondary); }
+    .outlook-view { font-size:var(--type-body-lg); font-weight:700; margin:6px 0 8px; }
+    .outlook-rationale { font-size:var(--type-body-sm); color:var(--color-fg-secondary); line-height:var(--line-height-relaxed); }
+    .report-footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--color-border-light); display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .footer-meta { font-size:var(--type-body-xs); color:var(--color-fg-tertiary); line-height:1.8; }
+    @media (max-width:900px) { .metrics-grid,.method-cards,.outlook-grid,.takeaway-grid { grid-template-columns:1fr; } .report-header{flex-direction:column;} .donut-panel{flex-direction:column;align-items:flex-start;} }
+  </style>
+</head>
+<body>
+<div class="report-container">
+  <div class="report-header">
+    <div>
+      <div class="header-title">Weekly Carbon Market Report</div>
+      <div class="header-meta"><span>15-19 June 2026</span><span>Issue 25</span></div>
+    </div>
+    <span class="header-badge">ACCU Market</span>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-label">Generic ACCU (Friday)</div><div class="metric-value">$38.15</div><div class="metric-sub">+$0.50 from Monday open</div></div>
+    <div class="metric-card"><div class="metric-label">Env. Plantings (Friday)</div><div class="metric-value">$51.55</div><div class="metric-sub">+$0.55 from Monday open</div></div>
+    <div class="metric-card"><div class="metric-label">Weekly Trade Volume</div><div class="metric-value">830.5k</div><div class="metric-sub">tCO2e across all methods</div></div>
+    <div class="metric-card"><div class="metric-label">Market Condition</div><div class="metric-value">Steady</div><div class="metric-sub">Modest uplift across methods</div></div>
+  </div>
+
+  <section>
+    <div class="section-divider"><div class="section-num">1</div><div class="section-line"></div></div>
+    <h2 class="section-heading">Executive Summary</h2>
+    <div class="overview-block">
+      <p>Generic ACCUs closed the week at $38.15 after opening Monday at $37.65, while premium methods kept clear spreads to generic. The biggest move came in Environmental Plantings, which moved from $51.00 on Monday to $51.55 by Friday.</p>
+      <p>Trade volume for the week came to 830.5k tCO2e across the supplied trade log. Activity was concentrated in generic and HIR-linked segments, while premium methods remained thinner but held their pricing separation.</p>
+    </div>
+    <div class="takeaway-grid">
+      <div class="takeaway-card"><strong>Week's Key Driver</strong><p>Policy timing still dominated sentiment, with the market waiting for the next concrete method and Safeguard signal.</p></div>
+      <div class="takeaway-card condition"><strong>Market Condition</strong><p>Generic ACCUs stayed rangebound, while Environmental Plantings repriced lower but still closed at a clear premium.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-divider"><div class="section-num">2</div><div class="section-line"></div></div>
+    <h2 class="section-heading">Market Dashboard</h2>
+    <div class="chart-wrap">
+      <div class="chart-wrap-title">Weekly ACCU Price by Method - Friday Close</div>
+      <svg viewBox="0 0 960 360" style="width:100%;height:auto;">
+<rect x="0" y="0" width="960" height="360" rx="8" fill="var(--color-bg-secondary)" stroke="var(--color-border-light)"/>
+<line x1="90" y1="270.0" x2="900" y2="270.0" stroke="#e7e5e4" stroke-width="1"/>
+<text x="58" y="274.0" text-anchor="end" font-size="12" fill="#78716b">$35</text>
+<line x1="90" y1="227.1" x2="900" y2="227.1" stroke="#e7e5e4" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="58" y="231.1" text-anchor="end" font-size="12" fill="#78716b">$40</text>
+<line x1="90" y1="184.3" x2="900" y2="184.3" stroke="#e7e5e4" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="58" y="188.3" text-anchor="end" font-size="12" fill="#78716b">$45</text>
+<line x1="90" y1="141.4" x2="900" y2="141.4" stroke="#e7e5e4" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="58" y="145.4" text-anchor="end" font-size="12" fill="#78716b">$50</text>
+<line x1="90" y1="98.6" x2="900" y2="98.6" stroke="#e7e5e4" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="58" y="102.6" text-anchor="end" font-size="12" fill="#78716b">$55</text>
+<line x1="90" y1="55.7" x2="900" y2="55.7" stroke="#e7e5e4" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="58" y="59.7" text-anchor="end" font-size="12" fill="#78716b">$60</text>
+<line x1="90" y1="270" x2="900" y2="270" stroke="#cfc8bc" stroke-width="1.4"/>
+<circle cx="130" cy="243.0" r="7" fill="#4a90e2" stroke="#fff" stroke-width="2"/>
+<text x="130" y="303" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1917"><tspan x="130" dy="0">Generic</tspan><tspan x="130" dy="18">ACCUs</tspan></text>
+<text x="130" y="343" text-anchor="middle" font-size="11" fill="#78716b">$38.15</text>
+<circle cx="270" cy="243.0" r="7" fill="#6ba3e8" stroke="#fff" stroke-width="2"/>
+<text x="270" y="303" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1917"><tspan x="270" dy="0">HIR</tspan><tspan x="270" dy="18">ACCUs</tspan></text>
+<text x="270" y="343" text-anchor="middle" font-size="11" fill="#78716b">$38.15</text>
+<circle cx="410" cy="243.9" r="7" fill="#f4d03f" stroke="#fff" stroke-width="2"/>
+<text x="410" y="303" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1917"><tspan x="410" dy="0">SMCs</tspan></text>
+<text x="410" y="325" text-anchor="middle" font-size="11" fill="#78716b">$38.05</text>
+<circle cx="550" cy="228.4" r="7" fill="#145c3c" stroke="#fff" stroke-width="2"/>
+<text x="550" y="303" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1917"><tspan x="550" dy="0">Plantation</tspan><tspan x="550" dy="18">Forestry</tspan></text>
+<text x="550" y="343" text-anchor="middle" font-size="11" fill="#78716b">$39.85</text>
+<circle cx="690" cy="128.1" r="7" fill="#2da86d" stroke="#fff" stroke-width="2"/>
+<text x="690" y="303" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1917"><tspan x="690" dy="0">Env.</tspan><tspan x="690" dy="18">Plantings</tspan></text>
+<text x="690" y="343" text-anchor="middle" font-size="11" fill="#78716b">$51.55</text>
+<circle cx="830" cy="154.7" r="7" fill="#d73136" stroke="#fff" stroke-width="2"/>
+<text x="830" y="303" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1917"><tspan x="830" dy="0">SFM</tspan><tspan x="830" dy="18">+ ICB</tspan></text>
+<text x="830" y="343" text-anchor="middle" font-size="11" fill="#78716b">$48.45</text>
+</svg>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Segment</th><th style="text-align:center;min-width:300px;">Price Range <span style="color:var(--color-brand-primary);">weekly</span>/<span style="color:var(--color-fg-tertiary);">12 month</span></th><th>Monday</th><th>Latest (19 Jun)</th><th>Move</th><th>Market Read</th></tr></thead>
+      <tbody>
+          <tr>
+            <td>Generic ACCUs</td>
+            <td class="rv-cell">
+              <div class="rv-wrap">
+                <span class="rv-endpoint rv-left">$33.75</span>
+                <div class="rv-track">
+                  <div class="rv-bar" style="left:78.6%;width:12.2%;"></div>
+                </div>
+                <span class="rv-endpoint rv-right">$38.65</span>
+              </div>
+              <div class="rv-week-lbl">$37.60-$38.20</div>
+            </td>
+            <td>$37.65</td>
+            <td>$38.15</td>
+            <td class="positive">+$0.50</td>
+            <td>Finished flat to Monday and stayed in a narrow spot range.</td>
+          </tr>
+
+          <tr>
+            <td>HIR ACCUs</td>
+            <td class="rv-cell">
+              <div class="rv-wrap">
+                <span class="rv-endpoint rv-left">$34.00</span>
+                <div class="rv-track">
+                  <div class="rv-bar" style="left:80.2%;width:11.0%;"></div>
+                </div>
+                <span class="rv-endpoint rv-right">$38.55</span>
+              </div>
+              <div class="rv-week-lbl">$37.65-$38.15</div>
+            </td>
+            <td>$37.70</td>
+            <td>$38.15</td>
+            <td class="positive">+$0.45</td>
+            <td>Held close to generic levels with only a small move over the period.</td>
+          </tr>
+
+          <tr>
+            <td>SMCs</td>
+            <td class="rv-cell">
+              <div class="rv-wrap">
+                <span class="rv-endpoint rv-left">$33.55</span>
+                <div class="rv-track">
+                  <div class="rv-bar" style="left:84.5%;width:8.2%;"></div>
+                </div>
+                <span class="rv-endpoint rv-right">$38.40</span>
+              </div>
+              <div class="rv-week-lbl">$37.65-$38.05</div>
+            </td>
+            <td>$37.65</td>
+            <td>$38.05</td>
+            <td class="positive">+$0.40</td>
+            <td>Tracked close to generic ACCUs and finished slightly softer from Monday.</td>
+          </tr>
+
+          <tr>
+            <td>Plantation Forestry</td>
+            <td class="rv-cell">
+              <div class="rv-wrap">
+                <span class="rv-endpoint rv-left">$33.80</span>
+                <div class="rv-track">
+                  <div class="rv-bar" style="left:90.9%;width:9.1%;"></div>
+                </div>
+                <span class="rv-endpoint rv-right">$39.85</span>
+              </div>
+              <div class="rv-week-lbl">$39.30-$39.85</div>
+            </td>
+            <td>$39.30</td>
+            <td>$39.85</td>
+            <td class="positive">+$0.55</td>
+            <td>Maintained a modest premium to generic ACCUs.</td>
+          </tr>
+
+          <tr>
+            <td>Environmental Plantings</td>
+            <td class="rv-cell">
+              <div class="rv-wrap">
+                <span class="rv-endpoint rv-left">$50.95</span>
+                <div class="rv-track">
+                  <div class="rv-bar" style="left:0.5%;width:5.5%;"></div>
+                </div>
+                <span class="rv-endpoint rv-right">$61.00</span>
+              </div>
+              <div class="rv-week-lbl">$51.00-$51.55</div>
+            </td>
+            <td>$51.00</td>
+            <td>$51.55</td>
+            <td class="positive">+$0.55</td>
+            <td>Remained the highest priced premium method in the dashboard.</td>
+          </tr>
+
+          <tr>
+            <td>SFM + ICB</td>
+            <td class="rv-cell">
+              <div class="rv-wrap">
+                <span class="rv-endpoint rv-left">$47.60</span>
+                <div class="rv-track">
+                  <div class="rv-bar" style="left:3.7%;width:6.7%;"></div>
+                </div>
+                <span class="rv-endpoint rv-right">$55.75</span>
+              </div>
+              <div class="rv-week-lbl">$47.90-$48.45</div>
+            </td>
+            <td>$47.90</td>
+            <td>$48.45</td>
+            <td class="positive">+$0.55</td>
+            <td>Held a stable premium to generic ACCUs across the partial week.</td>
+          </tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-divider"><div class="section-num">3</div><div class="section-line"></div></div>
+    <h2 class="section-heading">Premium Methods &amp; Price Analysis</h2>
+    <div class="method-cards">
+        <div class="method-card">
+          <div class="method-card-header">
+            <div class="method-name">Plantation Forestry</div>
+            <span class="method-status status-stable">Stable</span>
+          </div>
+          <div class="method-price">$39.85</div>
+          <div class="method-premium">+4.5% premium &nbsp;|&nbsp; +$1.70 to generic</div>
+          <div class="method-commentary">Orderly premium to generic ACCUs with a small positive move from Monday.</div>
+        </div>
+
+        <div class="method-card">
+          <div class="method-card-header">
+            <div class="method-name">SFM + ICB</div>
+            <span class="method-status status-stable">Stable</span>
+          </div>
+          <div class="method-price">$48.45</div>
+          <div class="method-premium">+27.0% premium &nbsp;|&nbsp; +$10.30 to generic</div>
+          <div class="method-commentary">Stable premium method pricing, with the latest close above generic by more than $10.</div>
+        </div>
+
+        <div class="method-card">
+          <div class="method-card-header">
+            <div class="method-name">Environmental Plantings</div>
+            <span class="method-status status-stable">Stable</span>
+          </div>
+          <div class="method-price">$51.55</div>
+          <div class="method-premium">+35.1% premium &nbsp;|&nbsp; +$13.40 to generic</div>
+          <div class="method-commentary">Still the clearest premium method, closing above $50 and well above generic ACCUs.</div>
+        </div></div>
+    <div class="chart-wrap">
+      <div class="chart-wrap-title">Premium to Generic ACCU - Friday Close (Generic baseline $38.15)</div>
+      <div class="premium-bars">
+        <div class="pbar-row">
+          <div class="pbar-label">Plantation Forestry</div>
+          <div class="pbar-track"><div class="pbar-fill plantation" style="width:12.7%;">+$1.70</div></div>
+          <div class="pbar-values">+$1.70</div>
+        </div>
+
+        <div class="pbar-row">
+          <div class="pbar-label">SFM + ICB</div>
+          <div class="pbar-track"><div class="pbar-fill sfm" style="width:76.9%;">+$10.30</div></div>
+          <div class="pbar-values">+$10.30</div>
+        </div>
+
+        <div class="pbar-row">
+          <div class="pbar-label">Environmental Plantings</div>
+          <div class="pbar-track"><div class="pbar-fill ep" style="width:100.0%;">+$13.40</div></div>
+          <div class="pbar-values">+$13.40</div>
+        </div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-divider"><div class="section-num">4</div><div class="section-line"></div></div>
+    <h2 class="section-heading">Trade Activity &amp; Liquidity</h2>
+    <div class="trade-grid">
+      <div class="text-block">
+        <h4>Trade Activity Summary</h4>
+        <p>Weekly trade volumes totalled <strong>830,490 tCO2e</strong> across the supplied trade log for 15-19 June 2026.</p><p>The volume split was Generic (No AD) 460,000 tCO2e (55.4%); Generic 235,000 tCO2e (28.3%); Human Induced Regeneration 75,000 tCO2e (9.0%); SMC 50,000 tCO2e (6.0%); Plantation Forestry* 5,490 tCO2e (0.7%); Generic* 5,000 tCO2e (0.6%).</p>
+        <div class="source-line">Source: Jarden trade log, 15-19 June 2026</div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-wrap-title">Trade Volume by Method Type - Week Ending 19 June 2026</div>
+        <div class="donut-panel">
+      <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" style="width:260px;max-width:100%;">
+        <circle cx="140" cy="150" r="75" fill="none" stroke="#e7e5e4" stroke-width="32"></circle>
+        <circle cx="140" cy="150" r="75" fill="none" stroke="#6ba3e8" stroke-width="32" stroke-dasharray="261.01 471.24" stroke-dashoffset="-0.00" transform="rotate(-90 140 150)"></circle><circle cx="140" cy="150" r="75" fill="none" stroke="#4a90e2" stroke-width="32" stroke-dasharray="133.34 471.24" stroke-dashoffset="-261.01" transform="rotate(-90 140 150)"></circle><circle cx="140" cy="150" r="75" fill="none" stroke="#f4d03f" stroke-width="32" stroke-dasharray="42.56 471.24" stroke-dashoffset="-394.36" transform="rotate(-90 140 150)"></circle><circle cx="140" cy="150" r="75" fill="none" stroke="#2da86d" stroke-width="32" stroke-dasharray="28.37 471.24" stroke-dashoffset="-436.92" transform="rotate(-90 140 150)"></circle><circle cx="140" cy="150" r="75" fill="none" stroke="#145c3c" stroke-width="32" stroke-dasharray="3.12 471.24" stroke-dashoffset="-465.29" transform="rotate(-90 140 150)"></circle><circle cx="140" cy="150" r="75" fill="none" stroke="#d73136" stroke-width="32" stroke-dasharray="2.84 471.24" stroke-dashoffset="-468.40" transform="rotate(-90 140 150)"></circle>
+        <circle cx="140" cy="150" r="52" fill="#f5f5f4"></circle>
+        <text x="140" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#1c1917">830,490</text>
+        <text x="140" y="166" text-anchor="middle" font-size="11" fill="#78716b">tCO2e</text>
+      </svg>
+      <div class="legend">
+          <div class="legend-row">
+            <span class="legend-dot" style="background:#6ba3e8;"></span>
+            <span>Generic (No AD)</span>
+            <strong>460,000</strong>
+          </div>
+          <div class="legend-row">
+            <span class="legend-dot" style="background:#4a90e2;"></span>
+            <span>Generic</span>
+            <strong>235,000</strong>
+          </div>
+          <div class="legend-row">
+            <span class="legend-dot" style="background:#f4d03f;"></span>
+            <span>Human Induced Regeneration</span>
+            <strong>75,000</strong>
+          </div>
+          <div class="legend-row">
+            <span class="legend-dot" style="background:#2da86d;"></span>
+            <span>SMC</span>
+            <strong>50,000</strong>
+          </div>
+          <div class="legend-row">
+            <span class="legend-dot" style="background:#145c3c;"></span>
+            <span>Plantation Forestry*</span>
+            <strong>5,490</strong>
+          </div>
+          <div class="legend-row">
+            <span class="legend-dot" style="background:#d73136;"></span>
+            <span>Generic*</span>
+            <strong>5,000</strong>
+          </div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-divider"><div class="section-num">5</div><div class="section-line"></div></div>
+    <h2 class="section-heading">Market Context &amp; Outlook</h2>
+    <div class="text-block"><h4>Safeguard &amp; Compliance</h4><p>The modest uplift in generic ACCU pricing this week reflects ongoing Safeguard baseline compliance positioning. Entities reporting at mid-year are undertaking portfolio optimization to align surplus/deficit positions ahead of 30 June reporting. The concentration of trading in generic and no-AD segments confirms this is compliance-driven rather than speculative activity.</p><div class="source-line">Source: RepuTex ACCUsmart assessments; Jarden trade log</div></div>
+    <div class="text-block"><h4>Method Development Pipeline</h4><p>The persistent premium for co-benefit methods (Plantation Forestry +4.5%, SFM + ICB +27.5%, Environmental Plantings +35.6%) underscores sustained buyer demand for abatement paired with biodiversity, habitat, or ecosystem health outcomes. This structural premium is expected to persist as Australian organizations increasingly incorporate nature-positive criteria into procurement mandates.</p><div class="source-line">Source: DCCEEW method approval tracker; buyer procurement feedback</div></div>
+    <div class="text-block"><h4>Market Outlook</h4><p>Generic ACCUs are likely to remain rangebound around $37.50-$38.00 until the next policy catalyst lands. Premium methods should stay supported, but recent EP volatility argues for more caution there than in Plantation or SFM + ICB.</p><div class="source-line">Source: RepuTex, CORE Markets, DCCEEW</div></div>
+    <div class="outlook-grid">
+      <div class="outlook-card"><div class="outlook-horizon">Short Term (2-4 weeks)</div><div class="outlook-view">Rangebound</div><div class="outlook-rationale">Generic ACCUs are likely to remain close to $37.50-$38.00 as compliance demand carries into the next few weeks.</div></div>
+      <div class="outlook-card"><div class="outlook-horizon">Medium Term (1-3 months)</div><div class="outlook-view">Policy-led</div><div class="outlook-rationale">Post 30 June reporting, look for renewed portfolio rebalancing. Potential volatility remains around method announcement timing.</div></div>
+      <div class="outlook-card"><div class="outlook-horizon">Premium Methods</div><div class="outlook-view">Supported</div><div class="outlook-rationale">Environmental Plantings and SFM + ICB remain well supported by demand, with forest methods likely to stay stable.</div></div>
+    </div>
+  </section>
+
+  <div class="report-footer">
+    <div class="footer-meta"><strong>Data sources:</strong> RepuTex ACCUsmart (spot prices), Jarden Carbon Trade Log (volumes), DCCEEW method register</div>
+    <div class="footer-meta" style="text-align:right;white-space:nowrap;"><div>Weekly Carbon Market Report</div><div>15-19 June 2026 | Issue 25</div></div>
+  </div>
+</div>
+</body>
+</html>
